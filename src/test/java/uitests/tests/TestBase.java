@@ -11,8 +11,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
+import java.util.UUID;
 
 public class TestBase {
+
+    private static final String SELENOID_URL = System.getProperty("selenoid.url");
+    private static final String SELENOID_LOGIN = System.getProperty("selenoid.login");
+    private static final String SELENOID_PASSWORD = System.getProperty("selenoid.password");
 
     @BeforeAll
     public static void setup() {
@@ -20,34 +25,25 @@ public class TestBase {
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserSize = System.getProperty("browser.size", "1920x1080");
         Configuration.browserVersion = System.getProperty("browser.version");
-        Configuration.timeout = 10000;
-
-        String selenoidLogin = System.getProperty("selenoid.login");
-        String selenoidPassword = System.getProperty("selenoid.password");
-        String selenoidUrl = System.getProperty("selenoid.url");
-
-        if (selenoidLogin != null && selenoidPassword != null && selenoidUrl != null) {
-            Configuration.remote = "eager";
-            Configuration.remote = String.format(
-                    "https://%s:%s@%s/wd/hub",
-                    selenoidLogin,
-                    selenoidPassword,
-                    selenoidUrl
-            );
-        }
-
-
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
-        Configuration.browserCapabilities = capabilities;
+        Configuration.timeout = 2000;
+        Configuration.pageLoadStrategy = "eager";
     }
 
     @BeforeEach
     public void beforeEach() {
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+        SelenideLogger.addListener("allure", new AllureSelenide());
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true,
+                "name", "Test: " + UUID.randomUUID()
+        ));
+
+        if (SELENOID_LOGIN != null && SELENOID_PASSWORD != null && SELENOID_URL != null) {
+            Configuration.remote = "https://" + SELENOID_LOGIN + ":" + SELENOID_PASSWORD + "@" + SELENOID_URL + "/wd/hub";
+        }
+
+        Configuration.browserCapabilities = capabilities;
     }
 
     @AfterEach
