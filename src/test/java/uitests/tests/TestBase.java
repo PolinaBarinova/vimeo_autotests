@@ -27,6 +27,7 @@ public class TestBase {
         String selenoidUrl = System.getProperty("selenoid.url");
 
         if (selenoidLogin != null && selenoidPassword != null && selenoidUrl != null) {
+            Configuration.remote = "eager";
             Configuration.remote = String.format(
                     "https://%s:%s@%s/wd/hub",
                     selenoidLogin,
@@ -34,6 +35,7 @@ public class TestBase {
                     selenoidUrl
             );
         }
+
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
