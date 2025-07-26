@@ -8,7 +8,6 @@ import static io.qameta.allure.Allure.step;
 
 
 @Owner("p.barinova")
-@Tag("Video Player")
 @DisplayName("Проверки видеоплеера")
 public class VideoPlayerUITests extends TestBase {
 

@@ -50,10 +50,10 @@ tasks.withType(Test) {
     }
 }
 
-task vimeo_vp_test(type: Test) {
-    useJUnitPlatform {
-        includeTags("Video Player")
-    }
-}
+//task vimeo_vp_test(type: Test) {
+//    useJUnitPlatform {
+//        includeTags("Video Player")
+//    }
+//}
 
 
