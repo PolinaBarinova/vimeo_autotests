@@ -11,43 +11,38 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
-import java.util.UUID;
 
 public class TestBase {
-
-    private static final String SELENOID_URL = System.getProperty("selenoid.url");
-    private static final String SELENOID_LOGIN = System.getProperty("selenoid.login");
-    private static final String SELENOID_PASSWORD = System.getProperty("selenoid.password");
 
     @BeforeAll
     public static void setup() {
         Configuration.baseUrl = "https://vimeo.com/";
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserSize = System.getProperty("browser.size", "1920x1080");
-        Configuration.browserVersion = System.getProperty("browser.version");
-        Configuration.timeout = 2000;
-        Configuration.pageLoadStrategy = "eager";
-        Configuration.remote = "https://" + SELENOID_LOGIN + ":" + SELENOID_PASSWORD + "@" + SELENOID_URL + "/wd/hub";
+        Configuration.browserVersion = System.getProperty("browser.version", "128.0");
+        Configuration.timeout = 10000;
+        Configuration.remote = "eager";
+        Configuration.remote = String.format(
+                "https://%s:%s@%s/wd/hub",
+                System.getProperty("selenoid.login", "user1"),
+                System.getProperty("selenoid.password", "1234"),
+                System.getProperty("selenoid.url", "selenoid.autotests.cloud")
+        );
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
-                "enableVideo", true,
-                "name", "Test: " + UUID.randomUUID()
+                "enableVideo", true
         ));
-
         Configuration.browserCapabilities = capabilities;
-
-//        if (SELENOID_LOGIN != null && SELENOID_PASSWORD != null && SELENOID_URL != null) {
-//            Configuration.remote = "https://" + SELENOID_LOGIN + ":" + SELENOID_PASSWORD + "@" + SELENOID_URL + "/wd/hub";
-//        }
-
     }
+
 
     @BeforeEach
     public void beforeEach() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
+
 
     @AfterEach
     void addAttachments() {
