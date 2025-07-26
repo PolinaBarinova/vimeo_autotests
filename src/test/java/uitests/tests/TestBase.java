@@ -27,11 +27,8 @@ public class TestBase {
         Configuration.browserVersion = System.getProperty("browser.version");
         Configuration.timeout = 2000;
         Configuration.pageLoadStrategy = "eager";
-    }
+        Configuration.remote = "https://" + SELENOID_LOGIN + ":" + SELENOID_PASSWORD + "@" + SELENOID_URL + "/wd/hub";
 
-    @BeforeEach
-    public void beforeEach() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
@@ -39,11 +36,17 @@ public class TestBase {
                 "name", "Test: " + UUID.randomUUID()
         ));
 
-        if (SELENOID_LOGIN != null && SELENOID_PASSWORD != null && SELENOID_URL != null) {
-            Configuration.remote = "https://" + SELENOID_LOGIN + ":" + SELENOID_PASSWORD + "@" + SELENOID_URL + "/wd/hub";
-        }
-
         Configuration.browserCapabilities = capabilities;
+
+//        if (SELENOID_LOGIN != null && SELENOID_PASSWORD != null && SELENOID_URL != null) {
+//            Configuration.remote = "https://" + SELENOID_LOGIN + ":" + SELENOID_PASSWORD + "@" + SELENOID_URL + "/wd/hub";
+//        }
+
+    }
+
+    @BeforeEach
+    public void beforeEach() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
     }
 
     @AfterEach
