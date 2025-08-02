@@ -27,7 +27,7 @@
 - Перемотка вперед ползунком
 - Перемотка назад ползунком
 
-## <img alt="Jenkins" height="25" src="media/Jenkins.svg" width="25"/> Сборка в [Jenkins](https://jenkins.autotests.cloud/job/C35_Evgenia_Malysheva_testwork/)
+## <img alt="Jenkins" height="25" src="media/Jenkins.svg" width="25"/> Сборка в [Jenkins](https://jenkins.autotests.cloud/job/vimeo_autotests/)
 
 
 <p align="center">  
@@ -64,7 +64,7 @@ ${TASK}
 "-Dbrowser.size=${BROWSER_SIZE}"
 ```
 
-## <img alt="Allure" height="25" src="media/Allure.svg" width="25"/></a>  <a name="Allure"></a>Allure [Report](https://jenkins.autotests.cloud/job/C35_Evgenia_Malysheva_testwork/allure/)	</a>
+## <img alt="Allure" height="25" src="media/Allure.svg" width="25"/></a>  <a name="Allure"></a>Allure [Report](https://jenkins.autotests.cloud/job/vimeo_autotests/30/allure/)	</a>
 
 
 ## Основная страница отчёта
