@@ -36,15 +36,15 @@ public class TestBase {
                 "enableVideo", true
         ));
 
-//        ChromeOptions options = new ChromeOptions();
-//        options.addArguments(
-//                "--disable-blink-features=AutomationControlled",
-//                "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
-//        );
-//        options.setExperimentalOption("excludeSwitches", List.of("enable-automation"));
-//        options.setExperimentalOption("useAutomationExtension", false);
-//
-//        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments(
+                "--disable-blink-features=AutomationControlled",
+                "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+        );
+        options.setExperimentalOption("excludeSwitches", List.of("enable-automation"));
+        options.setExperimentalOption("useAutomationExtension", false);
+
+        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 
         Configuration.browserCapabilities = capabilities;
 
