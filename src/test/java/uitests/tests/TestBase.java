@@ -22,7 +22,7 @@ public class TestBase {
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserSize = System.getProperty("browser.size", "1920x1080");
         Configuration.browserVersion = System.getProperty("browser.version", "128.0");
-        Configuration.pageLoadStrategy = "eager";
+        Configuration.timeout = 10000;
         Configuration.remote = String.format(
                 "https://%s:%s@%s/wd/hub",
                 System.getProperty("selenoid.login", "user1"),
