@@ -1,4 +1,4 @@
-<a href="https://litres.ru/ "> <img src="media/logo.png" width="200" height="200"> 
+<a href="https://vimeo.com/ "> <img src="media/logo.png" width="200" height="200"> 
 <h2 >Проект по автоматизации тестирования для компании <a href="https://vimeo.com/ "> Vimeo </a></h2> 
 
 ## Содержание:
@@ -27,16 +27,6 @@
 - Перемотка вперед ползунком
 - Перемотка назад ползунком
 
-2.API-тесты:
-- Тест1
-- Тест2
-- Тест3
-
-3.MOBILE-тесты:
-- Тест1
-- Тест2
-- Тест3
-
 ## <img alt="Jenkins" height="25" src="media/Jenkins.svg" width="25"/> Сборка в [Jenkins](https://jenkins.autotests.cloud/job/C35_Evgenia_Malysheva_testwork/)
 
 
@@ -47,12 +37,14 @@
 
 ## Параметры сборки в Jenkins:
 
-- BROWSER (браузер, по умолчанию chrome)
-- BROWSER_VERSION (версия браузера, по умолчанию 128.0)
-- BROWSER_SIZE (размер окна браузера, по умолчанию 1920x1080)
-- SELENOID_LOGIN и SELENOID_PASSWORD (логин и пароль)
-- SELENOID_URL (адрес Selenoid)
-- TASK (выбор тестов для запуска, по умолчанию test)
+При запуске сборки в **Jenkins** можно использовать следующие параметры:
+
+- `BROWSER` — браузер, **по умолчанию** `chrome`
+- `BROWSER_VERSION` — версия браузера, **по умолчанию** `128.0`
+- `BROWSER_SIZE` — размер окна браузера, **по умолчанию** `1920x1080`
+- `SELENOID_LOGIN` и `SELENOID_PASSWORD` — логин и пароль для доступа к Selenoid
+- `SELENOID_URL` — адрес сервера Selenoid
+- `TASK` — выбор тестов для запуска, **по умолчанию** `test`
 
 
 ## Команда для запуска из терминала

@@ -23,7 +23,6 @@ public class TestBase {
         Configuration.browserSize = System.getProperty("browser.size", "1920x1080");
         Configuration.browserVersion = System.getProperty("browser.version", "128.0");
         Configuration.timeout = 10000;
-        Configuration.remote = "eager";
         Configuration.remote = String.format(
                 "https://%s:%s@%s/wd/hub",
                 System.getProperty("selenoid.login", "user1"),
@@ -39,15 +38,10 @@ public class TestBase {
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments(
-                "--disable-blink-features=AutomationControlled",
-                "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+                "--disable-blink-features=AutomationControlled"
         );
-        options.setExperimentalOption("excludeSwitches", List.of("enable-automation"));
-        options.setExperimentalOption("useAutomationExtension", false);
 
-        Configuration.browserCapabilities = options;
-        //Configuration.browserCapabilities = capabilities;
-        Configuration.headless = false;
+        Configuration.browserCapabilities = capabilities;
     }
 
 
