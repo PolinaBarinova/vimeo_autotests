@@ -24,6 +24,7 @@ public class TestBase {
         Configuration.browserSize = System.getProperty("browser.size", "1920x1080");
         Configuration.browserVersion = System.getProperty("browser.version", "128.0");
         Configuration.timeout = 10000;
+        Configuration.pageLoadStrategy = "eager";
         Configuration.remote = String.format(
                 "https://%s:%s@%s/wd/hub",
                 System.getProperty("selenoid.login", "user1"),
@@ -31,22 +32,13 @@ public class TestBase {
                 System.getProperty("selenoid.url", "selenoid.autotests.cloud")
         );
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments(
-                "--disable-blink-features=AutomationControlled",
-                "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
-        );
-        options.setExperimentalOption("excludeSwitches", List.of("enable-automation"));
-        options.setExperimentalOption("useAutomationExtension", false);
-        options.setPageLoadStrategy(PageLoadStrategy.EAGER);
-        options.setCapability("selenoid:options", Map.of(
-                    "enableVNC", true,
-                    "enableVideo", true
-            ));
-
-        Configuration.browserCapabilities = options;
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
+        Configuration.browserCapabilities = capabilities;
     }
-
 
     @BeforeEach
     public void beforeEach() {
