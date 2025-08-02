@@ -44,7 +44,10 @@ public class TestBase {
         options.setExperimentalOption("excludeSwitches", List.of("enable-automation"));
         options.setExperimentalOption("useAutomationExtension", false);
 
+        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+
         Configuration.browserCapabilities = capabilities;
+
     }
 
 
