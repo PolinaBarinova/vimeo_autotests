@@ -21,8 +21,7 @@ dependencies {
             "com.fasterxml.jackson.core:jackson-databind:2.16.1",
             "com.fasterxml.jackson.core:jackson-annotations:2.16.1",
             "com.fasterxml.jackson.core:jackson-core:2.16.1",
-            "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1",
-            'org.aeonbits.owner:owner:1.0.12'
+            "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1"
     )
 }
 
@@ -42,7 +41,6 @@ allure {
 
 tasks.withType(Test) {
     useJUnitPlatform()
-    systemProperties(System.getProperties())
 
     testLogging {
         lifecycle {
