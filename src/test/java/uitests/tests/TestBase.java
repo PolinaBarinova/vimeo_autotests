@@ -3,6 +3,9 @@ package uitests.tests;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import config.ConfigProvider;
+import config.ProjectConfig;
+import config.WebConfig;
 import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
@@ -17,26 +20,12 @@ import java.util.Map;
 
 public class TestBase {
 
+    protected static final WebConfig webConfig = ConfigProvider.Instance.getConfig();
+
     @BeforeAll
     public static void setup() {
-        Configuration.baseUrl = "https://vimeo.com/";
-        Configuration.browser = System.getProperty("browser", "chrome");
-        Configuration.browserSize = System.getProperty("browser.size", "1920x1080");
-        Configuration.browserVersion = System.getProperty("browser.version", "128.0");
-        Configuration.timeout = 10000;
-        Configuration.remote = String.format(
-                "https://%s:%s@%s/wd/hub",
-                System.getProperty("selenoid.login"),
-                System.getProperty("selenoid.password"),
-                System.getProperty("selenoid.url")
-        );
-
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
-        Configuration.browserCapabilities = capabilities;
+        ProjectConfig projectConfig = new ProjectConfig(webConfig);
+        projectConfig.webConfig();
     }
 
     @BeforeEach
