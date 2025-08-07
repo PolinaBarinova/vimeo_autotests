@@ -14,9 +14,8 @@ import java.util.Map;
 
 public class TestBase {
 
-
     @BeforeAll
-    static void setup() {
+    public static void setup() {
         Configuration.baseUrl = "https://vimeo.com/";
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserSize = System.getProperty("browser.size", "1920x1080");
@@ -36,6 +35,7 @@ public class TestBase {
         ));
         Configuration.browserCapabilities = capabilities;
     }
+
 
     @BeforeEach
     public void beforeEach() {
