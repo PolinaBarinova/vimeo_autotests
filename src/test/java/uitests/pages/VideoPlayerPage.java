@@ -2,6 +2,7 @@ package uitests.pages;
 
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.Step;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
@@ -15,6 +16,8 @@ public class VideoPlayerPage {
     private final SelenideElement progressBar = $("div[data-progress-bar-timecode-container='true']");
     private final SelenideElement playedBar = $(".PlayedBar_module_played__a3ef1250.ChapterSegment_module_segmentBar__611ea95b");
     private final SelenideElement seekbar = $(".FocusTarget_module_focusTarget__00a969cc.shared_module_focusable__fd03e359");
+    private final SelenideElement enterFullscreenButton = $("[class=enter-fullscreen-icon]");
+    private final SelenideElement exitFullscreenButton = $("[class=exit-fullscreen-icon]");
 
     private static final String[] VIDEO_IDS = {
             "995775930",
@@ -31,26 +34,31 @@ public class VideoPlayerPage {
 
     public String videoId = getRandomVideoId();
 
+    @Step("Открыть видео")
     public VideoPlayerPage openVideo() {
         open(videoId);
         playerContainer.shouldBe(visible);
         return this;
     }
 
+    @Step("Воспроизвести видео")
     public VideoPlayerPage playVideo() {
         playButton.click();
         return this;
     }
 
+    @Step("Остановить видео")
     public VideoPlayerPage pauseVideo() {
         playButton.click();
         return this;
     }
 
+    @Step("Ожидание для контроля прогресса воспроизведения")
     public void waitForProgress(int ms) {
         sleep(ms);
     }
 
+    @Step("Получить текущее значение заполнения прогресс-бара")
     public double getLeftPercent() {
         progressBar.shouldBe(visible);
         String style = progressBar.getAttribute("style");
@@ -58,6 +66,7 @@ public class VideoPlayerPage {
         return Double.parseDouble(value);
     }
 
+    @Step("Получить процент просмотренного видео на прогресс-баре")
     public double getPlayedWidthPercent() {
         playedBar.shouldBe(visible);
         String style = playedBar.getAttribute("style");
@@ -65,12 +74,14 @@ public class VideoPlayerPage {
         return Double.parseDouble(percent);
     }
 
+    @Step("Перемотать видео с клавиатуры")
     public void seekWithKeyboard(Keys key) {
         seekbar.shouldBe(visible).scrollIntoView("{block: 'center'}");
         executeJavaScript("arguments[0].click();", seekbar);
         seekbar.sendKeys(key);
     }
 
+    @Step("Перемотать видео движением по прогресс-бару")
     public void seekByDragOffset(int offsetX) {
         Actions actions = new Actions(WebDriverRunner.getWebDriver());
         actions.moveToElement(seekbar)
@@ -78,5 +89,21 @@ public class VideoPlayerPage {
                 .moveByOffset(offsetX, 0)
                 .release()
                 .perform();
+    }
+
+    @Step("Перейти в полноэкранный режим")
+    public VideoPlayerPage enterFullscreen() {
+        enterFullscreenButton.shouldBe(visible).click();
+        return this;
+    }
+
+    @Step("Выйти из полноэкранного режима")
+    public VideoPlayerPage exitFullscreen() {
+        exitFullscreenButton.shouldBe(visible).click();
+        return this;
+    }
+
+    public boolean isFullscreen() {
+        return exitFullscreenButton.isDisplayed();
     }
 }

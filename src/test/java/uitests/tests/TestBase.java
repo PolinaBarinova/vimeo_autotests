@@ -26,9 +26,9 @@ public class TestBase {
         Configuration.timeout = 10000;
         Configuration.remote = String.format(
                 "https://%s:%s@%s/wd/hub",
-                System.getProperty("selenoid.login", "user1"),
-                System.getProperty("selenoid.password", "1234"),
-                System.getProperty("selenoid.url", "selenoid.autotests.cloud")
+                System.getProperty("selenoid.login"),
+                System.getProperty("selenoid.password"),
+                System.getProperty("selenoid.url")
         );
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
