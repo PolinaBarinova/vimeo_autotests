@@ -19,13 +19,14 @@
 
 <a id="cases"></a>
 ## Реализованные проверки:
-1.UI-тесты видеоплеера:
+UI-тесты видеоплеера:
 - Воспроизведение видео
 - Остановка воспроизведения видео
 - Перемотка вперед клавиатурой
 - Перемотка назад клавиатурой
 - Перемотка вперед ползунком
 - Перемотка назад ползунком
+- Переключение в полноэкранный режим и выход из него
 
 ## <img alt="Jenkins" height="25" src="media/Jenkins.svg" width="25"/> Сборка в [Jenkins](https://jenkins.autotests.cloud/job/vimeo_autotests/)
 
@@ -64,7 +65,7 @@ ${TASK}
 "-Dbrowser.size=${BROWSER_SIZE}"
 ```
 
-## <img alt="Allure" height="25" src="media/Allure.svg" width="25"/></a>  <a name="Allure"></a>Allure [Report](https://jenkins.autotests.cloud/job/vimeo_autotests/30/allure/)	</a>
+## <img alt="Allure" height="25" src="media/Allure.svg" width="25"/></a>  <a name="Allure"></a>Allure [Report](https://jenkins.autotests.cloud/job/vimeo_autotests/52/allure/)	</a>
 
 
 ## Основная страница отчёта
@@ -72,6 +73,16 @@ ${TASK}
 <p align="center">  
 <img title="Allure Overview Dashboard" src="media/AllureReport.jpg" width="850">  
 </p>  
+
+## Тест-кейсы
+
+<p align="center">  
+<img title="Allure Test Case" src="media/AllureTestCase1.jpg" width="850">  
+</p>  
+
+<p align="center">  
+<img title="Allure Test Case" src="media/AllureTestCase2.jpg" width="850">  
+</p> 
 
 ____
 ## <img alt="Allure" height="25" src="media/Telegram.svg" width="25"/></a> Уведомление в Telegram при помощи бота
